@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../static/styles.css">
+    <title>Reporte del Clima - Sol, Lluvia y Tecnología</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="main-title">Sol, Lluvia y Tecnología</h1>
+            <h2 class="subtitle">Reporte del Clima</h2>
+            <h3 class="location">{{ weather.location }}</h3>
+        </header>
+
+        <main class="weather-card">
+            <div class="weather-icon">
+                <i class="{{ weather.icon_class }}"></i>
+            </div>
+            <div class="temperature">{{ weather.temperature }}°C</div>
+            <div class="description">{{ weather.description }}</div>
+
+            <div class="details-grid">
+                <div class="detail-item humidity">
+                    <i class="fas fa-tint"></i>
+                    <span>Humedad</span>
+                    <strong>{{ weather.humidity }}%</strong>
+                </div>
+                <div class="detail-item wind">
+                    <i class="fas fa-wind"></i>
+                    <span>Viento</span>
+                    <strong>{{ weather.wind_speed }} km/h</strong>
+                </div>
+                 </div>
+        </main>
+
+        <footer class="footer-info">
+            <p class="timestamp">Actualizado: {{ weather.timestamp }}</p>
+            <p class="data-source">(Datos de ejemplo - Para demostración)</p>
+            <p class="contact-email">solluviaytecnologia@gmail.com</p>
+        </footer>
+    </div>
+</body>
+</html>
