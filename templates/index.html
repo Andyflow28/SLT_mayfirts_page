@@ -7,13 +7,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <title>Sol, Lluvia y Tecnología - Clima</title>
 </head>
 <body>
     <div class="main-container">
         <header class="brand-header">
-            <div class="header-container">
+             <div class="header-container">
                 <img src="{{ url_for('static', filename='images/logo_sol_lluvia.png') }}" alt="Logo Sol, Lluvia y Tecnología" class="logo-img">
                 <h1 class="company-name">Sol, Lluvia y Tecnología</h1>
             </div>
@@ -24,23 +24,23 @@
             <h2 class="location">{{ weather.location }}</h2>
             <div class="current-weather">
                 <div class="weather-icon">
-                    <i class="{{ weather.icon_class }}"></i>
+                    <i id="weather-condition-icon" class="{{ weather.icon_class }}"></i>
                 </div>
-                <div class="temperature">{{ weather.temperature }}°C</div>
-            </div>
-            <div class="description">{{ weather.description }}</div>
+                <div class="temperature" id="current-temp">{{ weather.temperature if weather.temperature is not none else '...' }}°C</div>
+                </div>
+            <div class="description" id="weather-description">{{ weather.description }}</div>
 
             <div class="details-row">
-                <div class="detail-item">
+                <div class="detail-item" id="humidity-item">
                     <i class="fas fa-tint detail-icon"></i>
-                    <span>Humedad: <strong>{{ weather.humidity }}%</strong></span>
+                    <span>Humedad: <strong id="humidity-value">{{ weather.humidity }}%</strong></span>
                 </div>
-                <div class="detail-item">
+                <div class="detail-item" id="wind-item">
                     <i class="fas fa-wind detail-icon"></i>
-                    <span>Viento: <strong>{{ weather.wind_speed }} km/h</strong></span>
+                    <span>Viento: <strong id="wind-value">{{ weather.wind_speed }} km/h</strong></span>
                 </div>
             </div>
-             <p class="timestamp">Actualizado: {{ weather.timestamp }}</p>
+             <p class="timestamp" id="update-timestamp">Última lectura: {{ weather.timestamp }}</p>
         </div>
 
         <footer class="app-footer">
@@ -49,8 +49,56 @@
                 <span><i class="fas fa-phone-alt"></i> +58 416 - 304 35 30</span>
                 <span><i class="fas fa-envelope"></i> solluviaytecnologia@gmail.com</span>
              </div>
-             <p class="data-source">(Datos del clima de ejemplo)</p>
+             <p class="data-source">(Datos obtenidos de nuestra red)</p>
         </footer>
     </div>
+
+    <script>
+        async function updateWeatherData() {
+            const tempElement = document.getElementById('current-temp');
+            const timestampElement = document.getElementById('update-timestamp');
+            const humidityValueElement = document.getElementById('humidity-value'); // Obtiene el <strong> de humedad
+            // const descriptionElement = document.getElementById('weather-description'); // Podrías añadir ID si quieres actualizarla
+            // const iconElement = document.getElementById('weather-condition-icon'); // Podrías añadir ID si quieres actualizarla
+
+            try {
+                const response = await fetch('/api/latest_reading');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+
+                if (data && !data.error) {
+                    // Actualiza Temperatura
+                    if (data.temperature !== null && data.temperature !== undefined) {
+                        tempElement.textContent = `${data.temperature}°C`;
+                    } else {
+                        tempElement.textContent = 'N/A °C';
+                    }
+                    // Actualiza Timestamp
+                    if (data.timestamp) {
+                        timestampElement.textContent = `Última lectura: ${data.timestamp}`;
+                    } else {
+                         timestampElement.textContent = `Última lectura: No disponible`;
+                    }
+                    // *** NUEVO: Actualiza Humedad ***
+                    if (data.humidity !== null && data.humidity !== undefined) {
+                        humidityValueElement.textContent = `${data.humidity}%`;
+                    } else {
+                        humidityValueElement.textContent = `N/A %`;
+                    }
+
+                    // Podrías añadir lógica para actualizar descripción e icono aquí si la API los devolviera
+
+                } else {
+                    console.error("Error en datos recibidos:", data ? data.error : 'Respuesta vacía');
+                }
+            } catch (error) {
+                console.error('Error al obtener datos del clima:', error);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', updateWeatherData);
+        setInterval(updateWeatherData, 2000); // Actualiza cada 10 segundos
+    </script>
 </body>
 </html>
