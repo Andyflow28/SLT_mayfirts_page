@@ -1,28 +1,32 @@
-/* Importar Fuentes de Google */
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;600;700&display=swap');
+/* Importar Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&family=Poppins:wght@400;600;700&display=swap');
 
-/* Variables de Color (basadas en la infografía) */
+/* Variables de Color - Basadas en otan.jpeg */
 :root {
-    --bg-dark-teal: #1E3A3F; /* Fondo principal */
-    --accent-yellow: #FFD700; /* Acento principal (modificado para más visibilidad) */
-    --accent-yellow-light: #FFFACD; /* Amarillo muy pálido */
-    --accent-green: #4CAF50; /* Verde medio */
-    --accent-light-blue: #A0D2DB; /* Azul claro */
-    --accent-purple: #9C27B0; /* Púrpura (opcional) */
-    --text-light: #F8F9FA; /* Texto claro sobre fondo oscuro */
-    --text-dark: #212529;  /* Texto oscuro sobre fondo claro */
-    --card-bg: rgba(255, 255, 255, 0.95); /* Fondo de tarjeta semi-transparente */
-    --card-shadow: rgba(0, 0, 0, 0.15);
+    --background-cream: #F8F4E9; /* Fondo crema/beige claro */
+    --text-dark: #333333; /* Texto principal oscuro */
+    --script-font-color: #2F2F2F; /* Color para el nombre script */
+    --tagline-green: #388E3C; /* Verde oscuro para el tagline */
+    --logo-orange: #F57C00; /* Naranja del logo (aproximado) */
+    --logo-blue: #1976D2;  /* Azul del logo (aproximado) */
+    --icon-color-default: #547b84; /* Color base para iconos de clima */
+    --icon-sun: #FFA726; /* Naranja/amarillo para sol */
+    --icon-cloud: #90A4AE; /* Gris para nubes */
+    --icon-rain: #64B5F6; /* Azul claro para lluvia */
+    --detail-icon-color: var(--tagline-green); /* Verde para iconos de detalles */
+    --card-border: #E0E0E0; /* Borde sutil para la tarjeta */
+    --text-muted: #757575; /* Texto secundario */
 }
 
-/* Estilos generales */
+/* Estilos Base */
 body {
-    font-family: 'Lato', sans-serif; /* Fuente principal para cuerpo */
-    background-color: var(--bg-dark-teal);
-    color: var(--text-light); /* Texto claro por defecto */
+    font-family: 'Lato', sans-serif;
+    background-color: var(--background-cream);
+    color: var(--text-dark);
     margin: 0;
     padding: 20px;
     display: flex;
+    flex-direction: column; /* Permite centrar y añadir footer abajo */
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -30,199 +34,241 @@ body {
     line-height: 1.6;
 }
 
-/* Contenedor principal */
-.container {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0)); /* Fondo sutil */
-    backdrop-filter: blur(10px); /* Efecto vidrio esmerilado */
-    -webkit-backdrop-filter: blur(10px);
-    padding: 30px 40px;
-    border-radius: 25px; /* Esquinas más redondeadas */
-    box-shadow: 0 8px 32px 0 var(--card-shadow);
-    border: 1px solid rgba(255, 255, 255, 0.18); /* Borde sutil */
-    text-align: center;
-    max-width: 500px; /* Ancho máximo */
+/* Contenedor Principal */
+.main-container {
+    max-width: 700px; /* Un poco más ancho para acomodar branding */
     width: 100%;
+    padding: 15px;
     box-sizing: border-box;
-    overflow: hidden; /* Evita que elementos internos sobresalgan */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* Encabezado */
-header {
-    margin-bottom: 25px;
+/* Encabezado con Branding */
+.brand-header {
+    text-align: center;
+    margin-bottom: 30px;
+    width: 100%;
 }
 
-.main-title {
-    font-family: 'Poppins', sans-serif; /* Fuente diferente para título principal */
-    font-weight: 700;
-    font-size: 2.2em;
-    color: var(--accent-yellow); /* Color amarillo */
-    margin: 0 0 5px 0;
-    /* Podrías intentar añadir una sombra de texto si quieres emular el estilo script */
-    /* text-shadow: 1px 1px 2px rgba(0,0,0,0.2); */
-}
-
-.subtitle {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 400;
-    font-size: 1.2em;
-    color: var(--text-light);
+.company-name {
+    font-family: 'Pacifico', cursive; /* Fuente Script */
+    font-weight: 400; /* Pacifico es normal */
+    font-size: 3em; /* Tamaño grande */
+    color: var(--script-font-color);
     margin: 0 0 15px 0;
-    opacity: 0.9;
+    line-height: 1.2;
+}
+
+.logo-img {
+    max-width: 150px; /* Tamaño del logo */
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.tagline {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700; /* Bold */
+    font-size: 1.1em;
+    color: var(--tagline-green);
+    text-transform: uppercase; /* Mayúsculas */
+    letter-spacing: 1px; /* Espaciado entre letras */
+    margin: 0;
+}
+
+/* Tarjeta del Clima */
+.weather-card {
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 15px;
+    padding: 25px 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Sombra suave */
+    border: 1px solid var(--card-border); /* Borde sutil */
+    text-align: center;
+    width: 100%; /* Ocupa el ancho del contenedor */
+    max-width: 400px; /* Ancho máximo de la tarjeta interna */
+    box-sizing: border-box;
+    margin-bottom: 30px; /* Espacio antes del footer */
 }
 
 .location {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 1.4em;
-    color: var(--accent-light-blue); /* Azul claro para ubicación */
-    margin: 0;
+    font-size: 1.3em;
+    color: var(--tagline-green); /* Verde para la ubicación */
+    margin-bottom: 20px;
 }
 
-/* Tarjeta principal del clima */
-.weather-card {
-    background-color: var(--card-bg);
-    color: var(--text-dark); /* Texto oscuro dentro de la tarjeta */
-    padding: 25px;
-    border-radius: 15px;
-    margin-bottom: 25px;
-    box-shadow: 0 4px 15px var(--card-shadow);
+/* Clima Actual (Icono + Temp) */
+.current-weather {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
 }
 
-.weather-icon {
-    font-size: 5em; /* Icono grande */
-    color: var(--accent-yellow); /* Amarillo para el icono principal (ajustar si es necesario) */
-    margin-bottom: 15px;
+.weather-icon i {
+    font-size: 4.5em;
+    color: var(--icon-color-default); /* Color base */
 }
-/* Colores específicos para iconos (opcional, basado en la lógica de get_weather_icon) */
-.weather-icon .fa-sun { color: #FFC107; }
-.weather-icon .fa-cloud-sun { color: #4FC3F7; }
-.weather-icon .fa-cloud { color: #90A4AE; }
-.weather-icon .fa-cloud-showers-heavy { color: #42A5F5; }
-.weather-icon .fa-snowflake { color: #B3E5FC; }
-.weather-icon .fa-smog { color: #B0BEC5; }
-.weather-icon .fa-poo-storm { color: #795548; }
-
+/* Colores específicos para iconos */
+.weather-icon .fa-sun { color: var(--icon-sun); }
+.weather-icon .fa-cloud-sun { color: #74c0fc; } /* Azul cielo para nube/sol */
+.weather-icon .fa-cloud { color: var(--icon-cloud); }
+.weather-icon .fa-cloud-showers-heavy { color: var(--icon-rain); }
+.weather-icon .fa-snowflake { color: #a5d8ff; }
+.weather-icon .fa-smog { color: #ced4da; }
+.weather-icon .fa-bolt { color: var(--icon-sun); } /* Rayo amarillo */
 
 .temperature {
     font-size: 4em;
     font-weight: 700;
     color: var(--text-dark);
-    margin: 5px 0;
+    line-height: 1;
 }
 
 .description {
-    font-size: 1.5em;
-    color: #555;
+    font-size: 1.2em;
+    color: var(--text-muted);
     margin-bottom: 25px;
     text-transform: capitalize;
-    font-family: 'Poppins', sans-serif;
     font-weight: 600;
 }
 
-/* Grid para detalles (Humedad, Viento) */
-.details-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Columnas adaptables */
-    gap: 15px; /* Espacio entre items */
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid #eee; /* Separador sutil */
+/* Fila de Detalles (Humedad, Viento) */
+.details-row {
+    display: flex;
+    justify-content: space-evenly; /* Distribuye mejor con espacio alrededor */
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid var(--card-border);
+    margin-top: 15px;
+    flex-wrap: wrap; /* Permite que se ajusten en pantallas pequeñas */
+    gap: 15px; /* Espacio entre detalles */
 }
 
 .detail-item {
-    background-color: #f8f9fa; /* Fondo muy claro para items */
-    padding: 15px;
-    border-radius: 10px;
     display: flex;
-    flex-direction: column; /* Apila icono, etiqueta, valor */
     align-items: center;
-    font-size: 0.9em;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    gap: 8px;
+    font-size: 0.9em; /* Ligeramente más pequeño */
+    color: var(--text-muted);
 }
 
-.detail-item i { /* Icono dentro del item */
-    font-size: 1.8em;
-    margin-bottom: 8px;
-}
-
-.detail-item span { /* Etiqueta (Humedad, Viento) */
-    color: #666;
-    font-size: 0.8em;
-    margin-bottom: 4px;
-    text-transform: uppercase;
-}
-
-.detail-item strong { /* Valor */
+.detail-icon {
     font-size: 1.2em;
-    font-weight: 700;
-    color: var(--text-dark);
+    color: var(--detail-icon-color); /* Verde */
 }
 
-/* Colores específicos para iconos de detalles */
-.detail-item.humidity i { color: var(--accent-light-blue); }
-.detail-item.wind i { color: #78909C; } /* Un gris azulado para viento */
-.detail-item.pressure i { color: var(--accent-purple); } /* Si añades presión */
+.detail-item strong {
+    color: var(--text-dark);
+    font-weight: 700;
+}
 
-
-/* Pie de página */
-.footer-info {
+.timestamp { /* Timestamp dentro de la tarjeta ahora */
+    font-size: 0.75em;
+    color: var(--text-muted);
     margin-top: 20px;
-    font-size: 0.85em;
-    color: var(--text-light);
     opacity: 0.8;
 }
 
-.timestamp {
-    margin-bottom: 5px;
+.header-container {
+    display: flex;
+    align-items: center; /* Alinea verticalmente al centro */
+    gap: 0; /* Espacio entre el texto y la imagen */
+}
+
+
+/* Pie de Página con Info de Contacto */
+.app-footer {
+    margin-top: auto; /* Empuja el footer hacia abajo si hay espacio */
+    padding-top: 20px;
+    text-align: center;
+    font-size: 0.8em;
+    color: var(--text-muted);
+    width: 100%;
+}
+.contact-info {
+    display: flex;
+    flex-wrap: wrap; /* Para que se ajuste en pantallas pequeñas */
+    justify-content: center;
+    gap: 15px; /* Espacio entre datos de contacto */
+    margin-bottom: 10px;
+}
+.contact-info span {
+    display: inline-flex; /* Para alinear icono y texto */
+    align-items: center;
+    gap: 5px;
+}
+.contact-info i {
+    color: var(--tagline-green); /* Iconos de contacto en verde */
 }
 
 .data-source {
-    font-size: 0.9em;
     font-style: italic;
     opacity: 0.7;
-    margin-bottom: 10px;
+    margin-top: 0;
+    font-size: 0.9em;
 }
 
-.contact-email {
-    margin-top: 10px;
-    font-weight: bold;
-    color: var(--accent-light-blue);
-}
 
-/* Adaptación para pantallas pequeñas */
-@media (max-width: 550px) {
+/* Media Query para Móviles */
+@media (max-width: 480px) {
     body {
-        padding: 10px;
+        padding: 15px 10px; /* Más padding vertical */
     }
-    .container {
-        padding: 20px 25px;
+    .main-container {
+        padding: 5px;
     }
-    .main-title {
-        font-size: 1.8em;
+    .company-name {
+        font-size: 2.5em;
     }
-    .subtitle {
-        font-size: 1em;
+    .logo-img {
+        max-width: 120px;
+    }
+    .tagline {
+        font-size: 0.9em;
+    }
+    .weather-card {
+        padding: 20px;
+        margin-bottom: 20px;
     }
     .location {
-        font-size: 1.2em;
+        font-size: 1.1em;
     }
-    .weather-icon {
+    .current-weather {
+        flex-direction: column;
+        gap: 5px;
+        margin-bottom: 15px;
+    }
+    .weather-icon i {
         font-size: 4em;
     }
     .temperature {
-        font-size: 3em;
+        font-size: 3.2em;
     }
     .description {
-        font-size: 1.2em;
+        font-size: 1em;
     }
-    .details-grid {
-        grid-template-columns: 1fr; /* Una columna en móviles */
+    .details-row {
         gap: 10px;
-    }
+        padding-top: 10px;
+        margin-top: 10px;
+     }
     .detail-item {
-        padding: 12px;
+        font-size: 0.85em;
     }
-    .footer-info {
-        font-size: 0.8em;
+     .timestamp {
+        font-size: 0.7em;
+        margin-top: 15px;
+    }
+    .app-footer {
+        font-size: 0.75em;
+    }
+    .contact-info {
+        flex-direction: column; /* Apila info de contacto */
+        gap: 8px;
+        align-items: center;
     }
 }
