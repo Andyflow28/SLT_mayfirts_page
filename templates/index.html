@@ -22,25 +22,33 @@
 
         <div class="weather-card">
             <h2 class="location">{{ weather.location }}</h2>
-            <div class="current-weather">
-                <div class="weather-icon">
-                    <i id="weather-condition-icon" class="{{ weather.icon_class }}"></i>
-                </div>
-                <div class="temperature" id="current-temp">{{ weather.temperature if weather.temperature is not none else '...' }}°C</div>
-                </div>
-            <div class="description" id="weather-description">{{ weather.description }}</div>
 
-            <div class="details-row">
-                <div class="detail-item" id="humidity-item">
-                    <i class="fas fa-tint detail-icon"></i>
-                    <span>Humedad: <strong id="humidity-value">{{ weather.humidity }}%</strong></span>
+            <div class="main-parameters">
+                <div class="parameter-item">
+                    <div class="param-icon temp-icon">
+                         <i id="weather-condition-icon" class="{{ weather.icon_class }}"></i>
+                    </div>
+                    <div class="param-value" id="temp-value">{{ weather.temperature if weather.temperature is not none else '...' }}°C</div>
+                    <div class="param-label">Temperatura</div>
                 </div>
-                <div class="detail-item" id="wind-item">
-                    <i class="fas fa-wind detail-icon"></i>
-                    <span>Viento: <strong id="wind-value">{{ weather.wind_speed }} km/h</strong></span>
+
+                <div class="parameter-item">
+                    <div class="param-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <div class="param-value" id="humidity-value">{{ weather.humidity if weather.humidity is not none else '...' }}%</div>
+                    <div class="param-label">Humedad</div>
+                </div>
+
+                <div class="parameter-item pressure-value">
+                     <div class="param-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div class="param-value" id="pressure-value">{{ weather.pressure if weather.pressure is not none else '...' }} mbar</div>
+                    <div class="param-label">Presión Atm.</div>
                 </div>
             </div>
-             <p class="timestamp" id="update-timestamp">Última lectura: {{ weather.timestamp }}</p>
+            <p class="timestamp" id="update-timestamp">Última lectura: {{ weather.timestamp }}</p>
         </div>
 
         <footer class="app-footer">
@@ -49,17 +57,16 @@
                 <span><i class="fas fa-phone-alt"></i> +58 416 - 304 35 30</span>
                 <span><i class="fas fa-envelope"></i> solluviaytecnologia@gmail.com</span>
              </div>
-             <p class="data-source">(Datos obtenidos de nuestra red)</p>
         </footer>
     </div>
 
     <script>
         async function updateWeatherData() {
-            const tempElement = document.getElementById('current-temp');
+            const tempValueElement = document.getElementById('temp-value');
+            const humidityValueElement = document.getElementById('humidity-value');
+            const pressureValueElement = document.getElementById('pressure-value'); // Elemento para presión
             const timestampElement = document.getElementById('update-timestamp');
-            const humidityValueElement = document.getElementById('humidity-value'); // Obtiene el <strong> de humedad
-            // const descriptionElement = document.getElementById('weather-description'); // Podrías añadir ID si quieres actualizarla
-            // const iconElement = document.getElementById('weather-condition-icon'); // Podrías añadir ID si quieres actualizarla
+            const iconElement = document.getElementById('weather-condition-icon'); // Icono principal
 
             try {
                 const response = await fetch('/api/latest_reading');
@@ -70,25 +77,17 @@
 
                 if (data && !data.error) {
                     // Actualiza Temperatura
-                    if (data.temperature !== null && data.temperature !== undefined) {
-                        tempElement.textContent = `${data.temperature}°C`;
-                    } else {
-                        tempElement.textContent = 'N/A °C';
-                    }
+                    tempValueElement.textContent = (data.temperature !== null && data.temperature !== undefined) ? `${data.temperature}°C` : 'N/A °C';
+                    // Actualiza Humedad
+                    humidityValueElement.textContent = (data.humidity !== null && data.humidity !== undefined) ? `${data.humidity}%` : 'N/A %';
+                    // *** NUEVO: Actualiza Presión ***
+                    pressureValueElement.textContent = (data.pressure !== null && data.pressure !== undefined) ? `${data.pressure} mbar` : 'N/A mbar';
                     // Actualiza Timestamp
-                    if (data.timestamp) {
-                        timestampElement.textContent = `Última lectura: ${data.timestamp}`;
-                    } else {
-                         timestampElement.textContent = `Última lectura: No disponible`;
+                    timestampElement.textContent = data.timestamp ? `Última lectura: ${data.timestamp}` : `Última lectura: No disponible`;
+                    // *** NUEVO: Actualiza Icono Principal ***
+                    if (data.icon_class) {
+                         iconElement.className = data.icon_class; // Reemplaza la clase del icono
                     }
-                    // *** NUEVO: Actualiza Humedad ***
-                    if (data.humidity !== null && data.humidity !== undefined) {
-                        humidityValueElement.textContent = `${data.humidity}%`;
-                    } else {
-                        humidityValueElement.textContent = `N/A %`;
-                    }
-
-                    // Podrías añadir lógica para actualizar descripción e icono aquí si la API los devolviera
 
                 } else {
                     console.error("Error en datos recibidos:", data ? data.error : 'Respuesta vacía');
@@ -98,7 +97,8 @@
             }
         }
         document.addEventListener('DOMContentLoaded', updateWeatherData);
-        setInterval(updateWeatherData, 2000); // Actualiza cada 10 segundos
+        // *** AUMENTADO INTERVALO para no sobrecargar BD/API innecesariamente ***
+        setInterval(updateWeatherData, 15000); // Actualiza cada 15 segundos
     </script>
 </body>
 </html>

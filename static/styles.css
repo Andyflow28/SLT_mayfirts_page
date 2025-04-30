@@ -1,208 +1,238 @@
-/* Importar Fuentes */
+/* ============================= */
+/*          FUENTES             */
+/* ============================= */
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&family=Poppins:wght@400;600;700&display=swap');
 
-/* Variables de Color - Basadas en otan.jpeg */
+/* ============================= */
+/*      VARIABLES DE COLOR      */
+/* ============================= */
 :root {
-    --background-cream: #F8F4E9; /* Fondo crema/beige claro */
-    --text-dark: #333333; /* Texto principal oscuro */
-    --script-font-color: #2F2F2F; /* Color para el nombre script */
-    --tagline-green: #388E3C; /* Verde oscuro para el tagline */
-    --logo-orange: #F57C00; /* Naranja del logo (aproximado) */
-    --logo-blue: #1976D2;  /* Azul del logo (aproximado) */
-    --icon-color-default: #547b84; /* Color base para iconos de clima */
-    --icon-sun: #FFA726; /* Naranja/amarillo para sol */
-    --icon-cloud: #90A4AE; /* Gris para nubes */
-    --icon-rain: #64B5F6; /* Azul claro para lluvia */
-    --detail-icon-color: var(--tagline-green); /* Verde para iconos de detalles */
-    --card-border: #E0E0E0; /* Borde sutil para la tarjeta */
-    --text-muted: #757575; /* Texto secundario */
+    --background-cream: #F8F4E9;
+    --text-dark: #333333;
+    --script-font-color: #2F2F2F;
+    --tagline-green: #388E3C;
+    --logo-orange: #F57C00;
+    --logo-blue: #1976D2;
+    --icon-color-default: #547b84;
+    --icon-sun: #FFA726;
+    --icon-cloud: #90A4AE;
+    --icon-rain: #64B5F6;
+    --icon-tint: #64B5F6;
+    --icon-pressure: #78909C;
+    --detail-icon-color: var(--tagline-green);
+    --card-border: #E0E0E0;
+    --text-muted: #757575;
+    --card-background: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.08);
 }
 
-/* Estilos Base */
+/* ============================= */
+/*          ESTILOS BASE        */
+/* ============================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: 'Lato', sans-serif;
     background-color: var(--background-cream);
     color: var(--text-dark);
-    margin: 0;
     padding: 20px;
     display: flex;
-    flex-direction: column; /* Permite centrar y añadir footer abajo */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    box-sizing: border-box;
     line-height: 1.6;
 }
 
-/* Contenedor Principal */
+/* ============================= */
+/*      CONTENEDOR PRINCIPAL    */
+/* ============================= */
 .main-container {
-    max-width: 700px; /* Un poco más ancho para acomodar branding */
+    max-width: 800px;
     width: 100%;
     padding: 15px;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Encabezado con Branding */
+/* ============================= */
+/*     ENCABEZADO / BRANDING    */
+/* ============================= */
 .brand-header {
     text-align: center;
     margin-bottom: 30px;
     width: 100%;
 }
 
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 .company-name {
-    font-family: 'Pacifico', cursive; /* Fuente Script */
-    font-weight: 400; /* Pacifico es normal */
-    font-size: 3em; /* Tamaño grande */
+    font-family: 'Pacifico', cursive;
+    font-weight: 400;
+    font-size: 2.8em;
     color: var(--script-font-color);
-    margin: 0 0 15px 0;
+    margin: 10px 0 0 0;
     line-height: 1.2;
+    order: 2;
 }
 
 .logo-img {
-    max-width: 150px; /* Tamaño del logo */
+    max-width: 130px;
     height: auto;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
+    order: 1;
 }
 
 .tagline {
     font-family: 'Poppins', sans-serif;
-    font-weight: 700; /* Bold */
-    font-size: 1.1em;
+    font-weight: 700;
+    font-size: 1em;
     color: var(--tagline-green);
-    text-transform: uppercase; /* Mayúsculas */
-    letter-spacing: 1px; /* Espaciado entre letras */
+    text-transform: uppercase;
+    letter-spacing: 1px;
     margin: 0;
 }
 
-/* Tarjeta del Clima */
+/* ============================= */
+/*       TARJETA DEL CLIMA      */
+/* ============================= */
 .weather-card {
-    background-color: #ffffff; /* Fondo blanco */
-    border-radius: 15px;
-    padding: 25px 30px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Sombra suave */
-    border: 1px solid var(--card-border); /* Borde sutil */
-    text-align: center;
-    width: 100%; /* Ocupa el ancho del contenedor */
-    max-width: 400px; /* Ancho máximo de la tarjeta interna */
-    box-sizing: border-box;
-    margin-bottom: 30px; /* Espacio antes del footer */
+    background-color: var(--card-background);
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 6px 20px var(--shadow-color);
+    border: 1px solid var(--card-border);
+    width: 100%;
+    max-width: 700px;
+    margin-bottom: 30px;
 }
 
 .location {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 1.3em;
-    color: var(--tagline-green); /* Verde para la ubicación */
+    font-size: 1.2em;
+    color: var(--tagline-green);
     margin-bottom: 20px;
+    text-align: center;
+    line-height: 1.3;
 }
 
-/* Clima Actual (Icono + Temp) */
-.current-weather {
+/* ============================= */
+/*     PARÁMETROS PRINCIPALES   */
+/* ============================= */
+.main-parameters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--card-border);
+}
+
+.parameter-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 0;
+}
+
+/* Estilo específico para presión atmosférica */
+.parameter-item.pressure-item .param-value {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    word-break: keep-all;
+    font-size: 1.7em; /* Tamaño ligeramente menor para mejor ajuste */
+}
+
+.param-icon {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
-    margin-bottom: 10px;
 }
 
-.weather-icon i {
-    font-size: 4.5em;
-    color: var(--icon-color-default); /* Color base */
-}
-/* Colores específicos para iconos */
-.weather-icon .fa-sun { color: var(--icon-sun); }
-.weather-icon .fa-cloud-sun { color: #74c0fc; } /* Azul cielo para nube/sol */
-.weather-icon .fa-cloud { color: var(--icon-cloud); }
-.weather-icon .fa-cloud-showers-heavy { color: var(--icon-rain); }
-.weather-icon .fa-snowflake { color: #a5d8ff; }
-.weather-icon .fa-smog { color: #ced4da; }
-.weather-icon .fa-bolt { color: var(--icon-sun); } /* Rayo amarillo */
+/* Colores de íconos */
+.param-icon .fa-sun { color: var(--icon-sun); }
+.param-icon .fa-cloud-sun { color: #74c0fc; }
+.param-icon .fa-cloud { color: var(--icon-cloud); }
+.param-icon .fa-cloud-showers-heavy { color: var(--icon-rain); }
+.param-icon .fa-snowflake { color: #a5d8ff; }
+.param-icon .fa-smog { color: #ced4da; }
+.param-icon .fa-bolt { color: var(--icon-sun); }
+.param-icon .fa-tint { color: var(--icon-rain); }
+.param-icon .fa-tachometer-alt { color: var(--icon-pressure); }
+.param-icon .fa-question-circle { color: var(--icon-cloud); }
 
-.temperature {
-    font-size: 4em;
+.param-value {
+    font-size: 1.8em;
     font-weight: 700;
     color: var(--text-dark);
-    line-height: 1;
+    line-height: 1.2;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    text-align: center;
 }
 
-.description {
-    font-size: 1.2em;
+.param-label {
+    font-size: 0.8em;
     color: var(--text-muted);
-    margin-bottom: 25px;
-    text-transform: capitalize;
     font-weight: 600;
 }
 
-/* Fila de Detalles (Humedad, Viento) */
-.details-row {
-    display: flex;
-    justify-content: space-evenly; /* Distribuye mejor con espacio alrededor */
-    align-items: center;
-    padding-top: 15px;
-    border-top: 1px solid var(--card-border);
-    margin-top: 15px;
-    flex-wrap: wrap; /* Permite que se ajusten en pantallas pequeñas */
-    gap: 15px; /* Espacio entre detalles */
-}
-
-.detail-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.9em; /* Ligeramente más pequeño */
-    color: var(--text-muted);
-}
-
-.detail-icon {
-    font-size: 1.2em;
-    color: var(--detail-icon-color); /* Verde */
-}
-
-.detail-item strong {
-    color: var(--text-dark);
-    font-weight: 700;
-}
-
-.timestamp { /* Timestamp dentro de la tarjeta ahora */
+.timestamp {
     font-size: 0.75em;
     color: var(--text-muted);
-    margin-top: 20px;
-    opacity: 0.8;
+    margin-top: 0;
+    opacity: 0.9;
+    text-align: center;
 }
 
-.header-container {
-    display: flex;
-    align-items: center; /* Alinea verticalmente al centro */
-    gap: 0; /* Espacio entre el texto y la imagen */
-}
-
-
-/* Pie de Página con Info de Contacto */
+/* ============================= */
+/*           PIE DE PÁGINA      */
+/* ============================= */
 .app-footer {
-    margin-top: auto; /* Empuja el footer hacia abajo si hay espacio */
+    margin-top: auto;
     padding-top: 20px;
     text-align: center;
-    font-size: 0.8em;
+    font-size: 0.9em;
     color: var(--text-muted);
     width: 100%;
 }
+
 .contact-info {
     display: flex;
-    flex-wrap: wrap; /* Para que se ajuste en pantallas pequeñas */
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 15px; /* Espacio entre datos de contacto */
+    gap: 20px;
     margin-bottom: 10px;
 }
+
 .contact-info span {
-    display: inline-flex; /* Para alinear icono y texto */
+    display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
 }
+
 .contact-info i {
-    color: var(--tagline-green); /* Iconos de contacto en verde */
+    color: var(--tagline-green);
+    font-size: 1.1em;
 }
 
 .data-source {
@@ -212,63 +242,110 @@ body {
     font-size: 0.9em;
 }
 
-
-/* Media Query para Móviles */
-@media (max-width: 480px) {
-    body {
-        padding: 15px 10px; /* Más padding vertical */
-    }
+/* ============================= */
+/*       MEDIA QUERIES          */
+/* ============================= */
+@media (max-width: 520px) {
     .main-container {
-        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
+
     .company-name {
-        font-size: 2.5em;
+        font-size: 2.2em;
     }
+    
     .logo-img {
-        max-width: 120px;
+        max-width: 100px;
     }
+    
     .tagline {
-        font-size: 0.9em;
+        font-size: 0.85em;
     }
+
     .weather-card {
-        padding: 20px;
-        margin-bottom: 20px;
+        padding: 20px 15px;
     }
+    
     .location {
         font-size: 1.1em;
     }
-    .current-weather {
+
+    .main-parameters {
+        display: flex; /* O display: block; */
         flex-direction: column;
-        gap: 5px;
-        margin-bottom: 15px;
+        gap: 20px; /* Ajusta el espacio vertical entre los elementos si es necesario */
+        /* grid-template-columns y gap del grid ya no son necesarios aquí */
     }
-    .weather-icon i {
-        font-size: 4em;
+
+    .parameter-item {
+        align-items: center; /* Centra el contenido de cada parámetro */
+        text-align: center; /* Centra el texto */
     }
-    .temperature {
-        font-size: 3.2em;
+    
+    .parameter-item:last-child {
+        border-bottom: none;
     }
-    .description {
-        font-size: 1em;
+    
+    /* Ajuste específico para presión en móviles */
+    .parameter-item.pressure-item {
+        flex-wrap: wrap;
     }
-    .details-row {
-        gap: 10px;
-        padding-top: 10px;
-        margin-top: 10px;
-     }
-    .detail-item {
-        font-size: 0.85em;
+    
+    .parameter-item.pressure-item .param-value {
+        min-width: 100%;
+        text-align: left;
+        white-space: normal;
+        font-size: 1.5em;
+        padding-right: 10px;
     }
-     .timestamp {
+    
+    .param-icon {
+        font-size: 1.8em;
+        margin-bottom: 0;
+        margin-right: 15px;
+        order: -1;
+    }
+    
+    .param-value {
+        font-size: 1.4em;
+        text-align: right;
+    }
+    
+    .param-label {
+        text-align: left;
+        flex-grow: 1;
+    }
+    
+    .timestamp {
         font-size: 0.7em;
         margin-top: 15px;
     }
+    
     .app-footer {
-        font-size: 0.75em;
+        font-size: 0.8em;
     }
+    
     .contact-info {
-        flex-direction: column; /* Apila info de contacto */
-        gap: 8px;
+        flex-direction: column;
+        gap: 10px;
         align-items: center;
+    }
+}
+
+@media (min-width: 768px) {
+    .param-value {
+        font-size: 2em;
+    }
+    
+    /* Ajuste específico para presión en pantallas grandes */
+    .parameter-item.pressure-item .param-value {
+        font-size: 1.8em;
+        letter-spacing: -0.3px;
+    }
+    
+    .main-parameters {
+        gap: 25px;
     }
 }
